@@ -632,9 +632,8 @@ class TanhBijector(object):
         :param y:
         :return:
         """
-        eps = th.finfo(y.dtype).eps
         # Clip the action to avoid NaN
-        return TanhBijector.atanh(y.clamp(min=-1.0 + eps, max=1.0 - eps))
+        return TanhBijector.atanh(y.clamp(min=-1.0 + 1e-6, max=1.0 - 1e-6))
 
     def log_prob_correction(self, x: th.Tensor) -> th.Tensor:
         # Squash correction (from original SAC implementation)
